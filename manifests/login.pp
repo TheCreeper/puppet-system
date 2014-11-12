@@ -73,7 +73,7 @@ class system::login (
 	validate_string($config_group)
 	validate_string($config_template)
 
-	validate_absolute_path($mail_dir)
+	validate_string($mail_dir)
 	validate_string($mail_file)
 	validate_string($faillog_enab)
 	validate_string($log_unkfail_enab)
