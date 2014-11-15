@@ -11,8 +11,8 @@ class system::motd (
 	$config_template = 'system/etc/motd.erb',
 	$config_content = undef,
 
-	$config_header = undef,
-	$config_footer = undef,
+	$config_template_header = undef,
+	$config_template_footer = undef,
 ) {
 
 	validate_absolute_path($config_path)
@@ -23,8 +23,8 @@ class system::motd (
 	validate_string($config_template)
 	validate_string($config_content)
 
-	validate_string($config_header)
-	validate_string($config_footer)
+	validate_string($config_template_header)
+	validate_string($config_template_footer)
 
 	if ($config_template) and ($config_content) {
 

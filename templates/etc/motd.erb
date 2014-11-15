@@ -1,5 +1,5 @@
-<% if @config_header -%>
-<%= scope.function_template([@config_header]) %>
+<% if @config_template_header -%>
+<%= scope.function_template([@config_template_header]) %>
 <% end -%>
 +++++++++++++++++: System Data :++++++++++++++++++++
 Uptime: 	<%= @uptime %>
@@ -15,8 +15,8 @@ IPv6: 		<%= @ipaddress6 %>
 Processor: 	<%= @processor0 %>
 Memory: 	<%= @memorysize %>
 Memory Free: 	<%= @memoryfree %>
-<% if @config_footer -%>
-<%= scope.function_template([@config_footer]) %>
+<% if @config_template_footer -%>
+<%= scope.function_template([@config_template_footer]) %>
 <% else -%>
 +++++++++++++++++++++++++++++++++++++++++++++++++++++
 <% end -%>
