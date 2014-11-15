@@ -1,0 +1,11 @@
+<% if @config_header -%>
+<%= scope.function_template($config_header) %>
+<% end -%>
+
+WARNING : Unauthorized access to this system is forbidden and will be
+prosecuted by law. By accessing this system, you agree that your actions
+may be monitored if unauthorized usage is suspected.
+
+<% if @config_footer -%>
+<%= scope.function_template($config_footer) %>
+<% end -%>

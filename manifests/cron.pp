@@ -6,12 +6,16 @@ class system::cron (
 	$package_ensure = latest,
 	$package_name = 'cron',
 
-	$service_manage = true,
+	$service_manage = false,
 	$service_enable = true,
 	$service_ensure = running,
 	$service_name = 'cron',
 
-	$configdir = '/etc',
+	$config_dir = '/etc',
+	$config_ensure = present,
+	$config_mode = 0644,
+	$config_owner = 'root',
+	$config_group = 'root',
 
 	$cronallow = ['root'],
 	$crondeny = [],
@@ -30,7 +34,10 @@ class system::cron (
 	validate_string($service_ensure)
 	validate_string($service_name)
 
-	validate_absolute_path($configdir)
+	validate_absolute_path($config_dir)
+	validate_string($config_ensure)
+	validate_string($config_mode)
+	validate_string($config_group)
 
 	validate_array($cronallow)
 	validate_array($crondeny)
@@ -45,27 +52,27 @@ class system::cron (
 		}
 	}
 
-	$config_ensure = $package_ensure ? {
+	$cfg_ensure = $package_ensure ? {
 
 		'absent' => 'absent',
 		'purged' => 'absent',
-		default => present,
+		default => $config_ensure,
 	}
 
-	file { "${configdir}/cron.allow":
+	file { "${config_dir}/cron.allow":
 
-		ensure => $config_ensure,
-		mode => '0644',
-		owner => 'root',
-		group => 'root',
+		ensure => $cfg_ensure,
+		mode => $config_mode,
+		owner => $config_owner,
+		group => $config_group,
 		content => template($cronallowtemplate),
 	}->
-	file { "${configdir}/cron.deny":
+	file { "${config_dir}/cron.deny":
 
-		ensure => $config_ensure,
-		mode => '0644',
-		owner => 'root',
-		group => 'root',
+		ensure => $cfg_ensure,
+		mode => $config_mode,
+		owner => $config_owner,
+		group => $config_group,
 		content => template($crondenytemplate),
 	}
 

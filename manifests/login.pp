@@ -68,6 +68,7 @@ class system::login (
 
 ) {
 
+	validate_absolute_path($config_path)
 	validate_string($config_ensure)
 	validate_string($config_mode)
 	validate_string($config_group)
@@ -132,10 +133,10 @@ class system::login (
 
 	file { $config_path:
 
-		ensure => $system::login::config_ensure,
-		mode => '0644',
-		owner => 'root',
-		group => 'root',
+		ensure => $config_ensure,
+		mode => $config_mode,
+		owner => $config_owner,
+		group => $config_group,
 		content => template($config_template),
 	}
 }
